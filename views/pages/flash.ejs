@@ -1,0 +1,51 @@
+<% include('../partials/header.ejs') %>
+<div class="" style="width: 90%; margin: auto;">
+    
+    <canvas id="myCanvas" height="100%" style="width: 95%; max-height: 20%; border:2px solid #000000; border-radius: 5px;">
+            
+            <script>
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                ctx.beginPath();
+                ctx.arc(9,9, 4, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(9, 90, 4, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(291, 90, 4, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(291, 9, 4, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.font = "15px Arial";
+                ctx.fillText('<%= msg %>', 20, 50);
+                ctx.moveTo(15, 15);
+                ctx.lineTo(15, 85);
+                ctx.stroke();
+                ctx.moveTo(8, 20);
+                ctx.lineTo(8, 78);
+                ctx.stroke();
+                ctx.moveTo(285, 85);
+                ctx.lineTo(15, 85);
+                ctx.stroke();
+                ctx.moveTo(285, 15);
+                ctx.lineTo(15, 15);
+                ctx.stroke();
+                ctx.moveTo(285, 15);
+                ctx.lineTo(285, 85);
+                ctx.stroke();
+            </script>
+    </canvas>
+    
+    <h2>Flash page</h2>
+    <%= msg %>
+        <% if(msg && msg.length>0) {%>
+            <h3> message flash :
+                <%= msg %>
+            </h3>
+            <% } else { %>
+                Vous n'avez pas de message flash
+                <% } %>
+</div>
+    
