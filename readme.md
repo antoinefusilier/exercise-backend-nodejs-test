@@ -6,6 +6,17 @@
 
 - [Mardown Documentation : /doc/markdown/]('https://sahirato.tech/doc/markdown/')
 
+# Resources 
+
+- [Import / Export models (class) ]('https://www.digitalocean.com/community/tutorials/nodejs-export-and-import-modules');
+
+
+## Install types
+
+## Windows Server 2019-2022
+
+[Pricipal resource : Orcacore.com]('https://orcacore.com/install-node-js-windows-server-2022/')
+
 ### Authentification 
 
 #### JWT La manière la manière la plus sécurisée
@@ -14,4 +25,5 @@ Dans la session on a juste un ID de la session que nous allions ramener dans la 
 - [jwt.io](https://jwt.io/)
 
 - [jwt Documentation Officielle](https://github.com/auth0/node-jsonwebtoken
-)
+
+

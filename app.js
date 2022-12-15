@@ -39,9 +39,35 @@ const MongoStore = require('connect-mongo');
 // ############## INITIALISATION PRINCIPALE ################
 // ##########################################################
 // Importation du controller principale "index.js" dans la constante "MASTER_CONTROLLER"
-const MASTER_CONTROLLER = require('./utils/index');
+const initComponent = require('./components/init/init.js');
 // Utilisation de la méthode "initApp" du "MASTER_CONTROLLER" pour initialiser l'application
-MASTER_CONTROLLER.initApp(app);
+initComponent.initApp(app);
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
+
+app.get('/api/init', (req, res) => {
+    // req.json({ message: 'INITIALISATION DE L\'APPLICATION...' });
+    res.status(200).json({  
+        'messege enroll': 'data received'  
+    }) 
+    // res.json({ message: 'INITIALISATION DE L\'APPLICATION...' }).send("init");
+});
 
 
 // Recupération du model IsAuth du fichier "auth.js" des "utils" (dossiers des outils = comme les "services" des frameworks front)
@@ -201,7 +227,52 @@ app.get('/logout', (req, res) => {
     res.redirect('pages/home')
 })
 
-console.log(app.get('init_logs'));
+let init_lofs = app.get('init_logs');
+
+const cors = require('cors');
+console.log("init_logs", this.init_logs);
+
+app.use(cors());
+// app.use(flash());
+const test = app.get('init_logs');
+console.log("test :: ", test);
+app.get('/testing',cors(), (req, res) => {
+    const message = {"connected": "http://localhost:3008"};
+    console.log(message);
+    res.send(
+        message);
+});	
+
+const auth = require('./components/auth/authApi');
+const authAPI = require('./components/auth/authApi');
+new authAPI(app);
+
+
+const SellingProductsFile = require('./components/sellingProducts/sellingProducts');
+const SellingProducts = new SellingProductsFile(app);
+SellingProducts.add();
+console.log("SellingProducts APPP :: ", SellingProducts);
+
+
+const ComponentManagerFile = require('./components/ComponentManager/componentManager')
+new ComponentManagerFile(app, 'add', {
+    name: "testing",
+    path: "component/testCreateComponent",
+    code: 'let test = 1;'
+});
+
+
+
+
+
+
+
+// e
+// SellingProducts.add();
+// new SellingProducts(app).get();
+
+
+
 // async function createProduct() {
 //     try {
 //         let product = new Product({

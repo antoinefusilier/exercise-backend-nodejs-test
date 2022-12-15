@@ -1,21 +1,29 @@
 // // load the things we need
 // // Recupération des packages express et execution du package express principale
-// const app = require('express')();
+const app = require('express')();
 // // Définition du port
-// const port = 3000;
+const port = 3000;
 // // Autre formulation possible :
 // // var express = require('express');	
 // // var app = express();
 // // Appel du package body-parser sans appel à une fonction principales
-// const bodyParser = require("body-parser");
-
+const bodyParser = require("body-parser");
+const cors = require('cors');
 // // set the view engine to ejs
 // app.set('view engine', 'ejs');
-// app.use(bodyParser.json()); 
-// app.use(bodyParser.urlencoded({
-//         extended: true
-//     }));
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+app.use(cors());
 
+app.get('',cors(), (req, res) => {
+    res.status(200).json({'Hello World!' : 'Hello test!'});
+});
+
+app.get('/testing',cors(), (req, res) => {
+    res.send({message : 'Hello World!'});
+});	
 // var session_validator = require('./utils/session');
 // session_validator
 //     .then((result) => {
@@ -37,8 +45,8 @@
 //     res.render('pages/about');
 // });
 
-// app.listen(3008);
-// console.log('3008 is the magic port');
+app.listen(3008);
+console.log('3008 is the magic port');
 
 // // #################### ROUTES : POST ####################
 // app.post('/login', async(req, res) => {

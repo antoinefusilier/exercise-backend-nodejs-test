@@ -1,0 +1,205 @@
+<%- include('../partials/header.ejs') %>
+    <h1>Hello, world!</h1>
+    <% let a=10; // console.log(a); for(let i=0; i<a; i++) { %>
+        <p>
+            <%= core_notifs[i] %>
+        </p>
+        <% } %>
+            <button onclick="autoScroll(),bip_start(),update_cli()">Baiser le scroll</button>
+            <style>
+                .PowerShellPre {
+                    display: inline;
+                    position: relative;
+                    padding: 0;
+                    width: 100%;
+                    margin: 0;
+                    color: #fff;
+                    border-radius: 5px;
+                    left: 0;
+                    height: 50px;
+                }
+
+                .PowerShellTextClient {
+                    display: inline;
+                    position: absolute;
+                    margin: 0px;
+                    left: 0%;
+                    width: 1200%;
+                    padding: none;
+                    text-align: left;
+                    height: 50px;
+                    border: none;
+                    background: none;
+                    color: white;
+                    font-size: 1.3rem;
+                }
+
+                .PowerShellTextClient:hover {
+                    border: none;
+                }
+
+                .PowerShellTextClient:focus {
+                    border: none;
+                    outline: none;
+                }
+
+                .PowerShellTextClient:active {
+                    border: none;
+                }
+            </style>
+            <div id="div21" style="
+        background-color: black;
+        background-image: 
+            radial-gradient(
+                rgba(0, 150, 0, 0.75), black 120%
+            );
+        height: 20vh;
+        color: white;
+        font: 1.3rem Inconsolata, monospace;
+        overscroll-behavior-y: auto;
+        overflow: auto;
+    ">
+                <script>
+                    function autoScroll() {
+                        let testScroll = document.getElementById("div21").scroll(0, 10000);
+
+                        // testScroll.scrollTop = testScroll.scrollTopMax;
+                    }
+
+
+                </script>
+                <pre id="testPre" class="pre_code" style=" top: 10px;
+        overscroll-behavior-y: auto;">
+            <code id="test01" class="pre_code" ><code id="loader"> / </code> Lectures des données core récupées ...</code>
+            <code id="enter_cli">
+                            222
+                        </code>
+        </pre>
+                <object type="audio/mpeg" data="views/sounds/bip_start.mp3" height="0" width="0">
+                    <param name="filename" value="views/sounds/bip_start.mp3">
+                    <param name="autostart" value="true" />
+                    <param name="loop" value="true" />
+                </object>
+                <script>
+                    const path = '/views/sounds/binari_code.mp3';
+                    const audio = document.createElement('audio')
+                    audio.src = path
+                    document.getElementsByTagName('div').appendChild(audio)
+                    audio.play()
+                </script>
+                <audio id="player"></audio>
+                <audio id="player" src="views/sounds/binari_code.mp3"></audio>
+                <script>
+                    // on indique le chemin de l'audio
+                    // qui doit être précisé dans l'attribut src
+                    // dans ce cas on l'indique dynamiquement,
+                    // mais on peu l'indiquer directement dans le code html
+                    function bip_start() {
+                        document.getElementById("player").setAttribute('src', '../sounds/bip_start.mp3');
+                        // pas à ce compliquer, il suffit d'appeller la méthode play(),
+                        // tout simplement ^^
+                        document.getElementById("player").play();
+                    }
+
+                </script>
+                <script>
+                    function update_cli() {
+                        document.getElementById("input_cli").addEventListener("input", function (event) {
+                            document.getElementById("enter_cli").innerHTML = document.getElementById("input_cli").value;
+                        });
+                    }
+                    let enter_cli = document.getElementById("enter_cli");
+
+
+                </script>
+                <pre class="PowerShellPre" style="height: 10px">
+            <input id="input_cli" class="PowerShellTextClient" type="text" value="C:\Users\Public>">
+        </pre>
+            </div>
+
+            <script>
+                document.body.onload = addElement;
+                function wait() {
+                    setTimeout(function () {
+                        addElement();
+                    }, 4000);
+                }
+                function deleteStatus() {
+                    let status = document.getElementById("test01");
+                    status.remove();
+                }
+
+                function loader(on_true, arrayLength) {
+                    let on = false;
+                    if (on_true) {
+                        on = on_true;
+                        let loader = document.getElementById("loader");
+                        if (on == true) {
+                            for (let o = 0; o < arrayLength; o++) {
+                                loader.innerHTML = "/";
+                                setTimeout(function () {
+                                    loader.innerHTML = "-";
+                                }, 300);
+                                setTimeout(function () {
+                                    loader.innerHTML = "\\";
+                                }, 600);
+                                setTimeout(function () {
+                                    loader.innerHTML = "|";
+                                }, 900);
+                            }
+                        }
+                    } else {
+                        on = false;
+
+                    }
+                }
+                function addElement() {
+                    let testing = '<%= core_notifs %>';
+                    let secondT = testing.split(',');
+                    let secondLength = secondT.length;
+                    let w = 0;
+                    loader(true, secondLength);
+                    let inter = setInterval(() => {
+                        if (w < secondLength) {
+                            loader(true, secondLength);
+
+                            let newPre = document.createElement("pre");
+                            let newCode = document.createElement("code");
+                            // newCode.style.display = "inline";
+                            // newCode.style.position = "relative";
+                            // newPre.className("pre_code");
+                            newCode.onmouseover = function () {
+                                newPre.style.backgroundColor = "aliceblue";
+                                newCode.style.color = "red";
+                            }
+                            newCode.onmouseout = function () {
+                                newCode.style.color = "white";
+                                newPre.style.background = "none";
+                            }
+                            newPre.appendChild(newCode);
+                            let newContent = document.createTextNode(secondT[w]);
+                            newCode.appendChild(newContent);
+                            let currentCode = document.getElementById("test01");
+                            let currentPre = document.getElementById("testPre");
+                            currentPre.appendChild(currentCode);
+                            currentCode.insertAdjacentElement('beforebegin', newPre);
+                            // document.insertAdjacentElement(newCode, currentCode);
+                            autoScroll();
+
+                            w++;
+                        } else {
+                            autoScroll();
+                            console.log('done, no more notifications');
+                            clearInterval(inter);
+                            deleteStatus()
+                            currentPre.remove();
+                        }
+                    }, 1000);
+                    loader(false)
+                }
+
+
+
+
+            </script>
+            <%- include('../partials/footer.ejs') %>
