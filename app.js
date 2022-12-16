@@ -252,15 +252,19 @@ const SellingProductsFile = require('./components/sellingProducts/sellingProduct
 const SellingProducts = new SellingProductsFile(app);
 SellingProducts.add();
 console.log("SellingProducts APPP :: ", SellingProducts);
-
+const path = require('path');
+// app.set('views', path.join(__dirname, './components'));
+// const express = require('express');
+// app.use(express.static(path.join(__dirname, './components')));
+// app.set('view engine', 'ejs');
 
 const ComponentManagerFile = require('./components/ComponentManager/componentManager')
-new ComponentManagerFile(app, 'add', {
-    name: "testing",
-    path: "component/testCreateComponent",
-    code: 'let test = 1;'
-});
-
+new ComponentManagerFile(app, 'init', {});
+// new ComponentManagerFile(app, 'add', {
+//     name: "testing",
+//     path: "component/testCreateComponent",
+//     code: 'let test = 1;'
+// });
 
 
 

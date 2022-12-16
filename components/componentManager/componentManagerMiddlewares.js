@@ -1,5 +1,8 @@
 const fs = require('fs');
-const fsExpres = require('fs-express');
+
+
+// const fsExpres = require('fs-express');
+const path = require('path');
 
 class ComponentManager {
     app;
@@ -12,9 +15,12 @@ class ComponentManager {
     fs = () => {
         return fs;
     }
-    fsExpres = () => {
-        return fsExpres(this.app);
+    path = () => {
+        return path;
     }
+    // fsExpres = () => {
+    //     return fsExpres(this.app);
+    // }
 
 }
 module.exports = ComponentManager;

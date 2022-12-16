@@ -2,7 +2,8 @@ const { exist } = require('joi');
 
 
 class ComponentController {
-    componentMiddlewares;
+    // ComponentManagerMiddlewares
+    cM;
     // component = {
     //     name: 'componentTest',
     //     path: 'component/testCreateComponent',
@@ -11,15 +12,50 @@ class ComponentController {
 
     constructor(app){
         let componentMiddlewares = require('./componentManagerMiddlewares');
-        this.componentMiddlewares = new componentMiddlewares(app);
+        this.cM = new componentMiddlewares(app);
+        app.set('views', this.cM.path().join(__dirname, './views'));
+
+        app.get('/componentManager', async(req, res) => {
+            res.render('componentManagerView');
+        });
     }
     addComponent = async(component) => {
-        if (!this.componentMiddlewares.fsExpres().scandirSync('components\\testCreateComponent\\')) {
-            this.componentMiddlewares.fsExpres().mkdirSync('components\\testCreateComponent\\');
-        }
-        this.componentMiddlewares.fs().writeFile(
-            'components\\testCreateComponent\\'
-            + component.name + 
+        // if (!this.componentMiddlewares.fs().scandir('components\\')) {
+            this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name), (err) =>        
+            {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            });
+        // }
+        // https://www.geeksforgeeks.org/node-js-fs-writefile-method/
+        // component.js
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/'+ component.name + 
+            '.js', 
+            component.code,
+            (err) => {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
+        // component.ejs
+        // this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name+'/views'), (err) =>        
+        //     {
+        //         if (err){
+        //             console.log(err);
+        //             return;
+        //         }
+        //     });
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/'+ component.name + 
             '.js', 
             component.code,
             (err) => {
@@ -30,6 +66,10 @@ class ComponentController {
             }
         );
     }
-
+    removeComponent = async(component) => {
+        this.cM.fs().rmdir(this.cM.path().join(__dirname,'../'+component.name), (err) => {
+            console.log('REMOVE A COMPONENT:: err',err);
+        });
+    }
 }
 module.exports = ComponentController;

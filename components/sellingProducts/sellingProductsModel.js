@@ -31,7 +31,7 @@ const SellingProductsSchema = new mongoose.Schema({
 });
 // Export et génération du modèle "Product" à partir du schéma "ProductSchema" . Le require("Product") utilisera ce modèle à partir du schema ci-dessus
 // model.exports = mongoose.model("SellingProducts", SellingProductsSchema);
-const SellingProducts = mongoose.model('SellingProducts', SellingProductsSchema);
+// const SellingProducts = mongoose.model('SellingProducts', SellingProductsSchema);
 
 module.exports = mongoose.model('SellingProducts', SellingProductsSchema);
 
