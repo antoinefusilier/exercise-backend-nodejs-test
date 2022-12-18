@@ -1,5 +1,7 @@
 # Hey welcome to this personal Web Server
 
+
+![Slide](./doc/www.sahirato.tech.jpg)
 ## What is this project ?
 
 ### Overall presentation
