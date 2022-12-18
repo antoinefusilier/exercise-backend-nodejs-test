@@ -21,16 +21,96 @@ class ComponentController {
     }
     addComponent = async(component) => {
         // if (!this.componentMiddlewares.fs().scandir('components\\')) {
-            this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name), (err) =>        
+        this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name), (err) =>        
             {
                 if (err){
                     console.log(err);
                     return;
                 }
-            });
+            }
+        );
         // }
+        // Writing folder of views
+        this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name+'/views'), (err) =>        
+            {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
+        // Writing principal view component : views/componentTestView.ejs
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/views/'+ component.name + 
+            'View.ejs', 
+            component.code.ejs,
+            (err) => {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
+        // Writing middlewares initialization component file :: MyComponentMiddlewares.js
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/'+ component.name + 
+            'Controller.js', 
+            component.code.controller,
+            (err) => {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
+        // Writing controller component file ::
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/'+ component.name + 
+            'Controller.js', 
+            component.code.controller,
+            (err) => {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
+        // Writing model component file ::
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/'+ component.name + 
+            'Model.js', 
+            component.code.model,
+            (err) => {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
+         // Writing model component file ::
+        this.cM.fs().writeFile(
+            'components/'
+            + component.name +
+            '/'+ component.name + 
+            'Mongo.js', 
+            component.code.mongo,
+            (err) => {
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            }
+        );
         // https://www.geeksforgeeks.org/node-js-fs-writefile-method/
-        // component.js
+        // Writing master component file ($COMPONENT_NAME.js) : component.js
         this.cM.fs().writeFile(
             'components/'
             + component.name +
@@ -44,6 +124,7 @@ class ComponentController {
                 }
             }
         );
+        
         // component.ejs
         // this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name+'/views'), (err) =>        
         //     {
