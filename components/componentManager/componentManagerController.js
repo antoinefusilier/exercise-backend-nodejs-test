@@ -11,14 +11,18 @@ class ComponentController {
     // }
 
     constructor(app){
+        // Init of component
         let componentMiddlewares = require('./componentManagerMiddlewares');
         this.cM = new componentMiddlewares(app);
         app.set('views', this.cM.path().join(__dirname, './views'));
 
         app.get('/componentManager', async(req, res) => {
+            
             res.render('componentManagerView');
+            
         });
     }
+
     addComponent = async(component) => {
         // if (!this.componentMiddlewares.fs().scandir('components\\')) {
         this.cM.fs().mkdir(this.cM.path().join(__dirname,'../'+component.name), (err) =>        

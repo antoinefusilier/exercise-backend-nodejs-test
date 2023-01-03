@@ -247,19 +247,43 @@ const auth = require('./components/auth/authApi');
 const authAPI = require('./components/auth/authApi');
 new authAPI(app);
 
+// Sahirato - Nodejs Component Manager
+
+
+// const CMLib = require('nodejs-component-manager');
+const CMLib = require('./lib/component-manager/index').init(app);
+// CM = new CM(app);
+// CM.add(component = {
+//     name: 'FirstTest',
+//     type: 'default',
+//     code : {
+//         js: 'let test = \'test\'',
+//         ejs: 'let test = \'test\'',
+//         api: 'let test = \'test\'',
+//         controller: 'let test = \'test\'',
+//         middelwares: 'let test = \'test\'',
+//         model: 'let test = \'test\'',
+//         mongo: 'let test = \'test\'',
+//         firebase: 'let test = \'test\'',
+//         amazone: 'let test = \'test\''
+//     }
+// })
+
+// console.log(CM);
+
 
 const SellingProductsFile = require('./components/sellingProducts/sellingProducts');
 const SellingProducts = new SellingProductsFile(app);
 SellingProducts.add();
-console.log("SellingProducts APPP :: ", SellingProducts);
+// console.log("SellingProducts APPP :: ", SellingProducts);
 const path = require('path');
 // app.set('views', path.join(__dirname, './components'));
 // const express = require('express');
 // app.use(express.static(path.join(__dirname, './components')));
 // app.set('view engine', 'ejs');
 
-const ComponentManagerFile = require('./components/ComponentManager/componentManager')
-new ComponentManagerFile(app, 'init', {});
+// const ComponentManagerFile = require('./components/ComponentManager/componentManager')
+// new ComponentManagerFile(app, 'init', {});
 // new ComponentManagerFile(app, 'add', {
 //     name: "testing",
 //     path: "component/testCreateComponent",
