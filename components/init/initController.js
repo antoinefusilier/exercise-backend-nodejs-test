@@ -9,6 +9,10 @@ class InitController {
     app = null;
     initLogs = null;
     constructor(app) {
+        app.set('views', this.NCMMiddlewares.path().join(__dirname, './views'));
+        app.get('/', async(req, res)=> {
+            res.render('initView');
+        });
         // Initializing of the app variable
         if (app == null) throw new Error("app is null");
         this.app = app;

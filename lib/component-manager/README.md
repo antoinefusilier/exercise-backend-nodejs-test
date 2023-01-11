@@ -8,6 +8,7 @@ A TypeScript version should also be available soon
 
 - [Doc.npm](./doc/npm.md)
 - [Commands](./doc/commands.md)
+- []
 
 # Call this component
 Where we use "CM" for "ComponentManager" shurtcut.
